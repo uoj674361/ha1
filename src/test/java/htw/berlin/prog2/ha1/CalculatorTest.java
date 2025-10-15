@@ -6,7 +6,91 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Retro calculator")
-class CalculatorTest {
+class   CalculatorTest {
+
+    @Test
+    @DisplayName("should display minus after adding two positive multi-digit numbers")
+    void testPositiveminus() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("1/x test gleich 0.5")
+    void testEinsdurch() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "0.5";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should display 0 when wurzel aus zero")
+    void testWurzelausZero() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("√");
+        calc.pressEqualsKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("multipy numbers")
+    void testMultiply() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(7);
+        //calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+
+        String expected = "14";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("zwei minuszahlen plus rechnen")
+    void testNegativeAdition() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressNegativeKey();
+        calc.pressEqualsKey();
+
+
+        String expected = "-9";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
     @Test
     @DisplayName("should display result after adding two positive multi-digit numbers")
@@ -87,8 +171,6 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-
-
     //TODO hier weitere Tests erstellen
 }
 
