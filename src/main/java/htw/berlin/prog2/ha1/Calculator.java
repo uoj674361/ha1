@@ -81,10 +81,20 @@ public class Calculator {
 
 
             case "1/x" -> {
+
+                /** Ausnahmefall: Wenn durch 0 geteilt wird muss Error angezeigt werden
+                 *
+                 */
+
                 double value = Double.parseDouble(screen);
                 if (value == 0) {
                     screen = "Error";
                     yield Double.NaN;
+
+                    /** Ansonsten rechne normal geteilt
+                     *
+                     */
+
                 } else {
                     yield 1 / value;
                 }
@@ -139,6 +149,9 @@ public class Calculator {
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
 
+/** Ausnahmefall: Wenn es keine latest Operation gibt dann behalte die Zahl auf dem Screen bei
+ *
+ */
             case "" -> Double.parseDouble(screen);
 
             default -> throw new IllegalArgumentException();
