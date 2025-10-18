@@ -47,7 +47,6 @@ class   CalculatorTest {
 
         calc.pressDigitKey(0);
         calc.pressBinaryOperationKey("√");
-        calc.pressEqualsKey();
 
         String expected = "0";
         String actual = calc.readScreen();
