@@ -9,7 +9,54 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class   CalculatorTest {
 
     @Test
-    @DisplayName("AAAAshould display minus after adding two positive multi-digit numbers")
+    @DisplayName("wenn = gedrückt aber keine Operation dann screen beibehalten")
+    void testMfghjfg() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressEqualsKey();
+
+        String expected = "9";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+
+    @Test
+    @DisplayName("1/0 -> Error")
+    void testDurchNullTeilen() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Wurzel aus Minuszahl muss Error sein")
+    void testMinuszahlWurzel() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressNegativeKey();
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+
+    @Test
+    @DisplayName("minus rechnen")
     void testPositiveminus() {
         Calculator calc = new Calculator();
 
@@ -27,7 +74,7 @@ class   CalculatorTest {
     }
 
     @Test
-    @DisplayName("1/x test gleich 0.5")
+    @DisplayName("1/x test mit 2")
     void testEinsdurch() {
         Calculator calc = new Calculator();
 
